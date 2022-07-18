@@ -7,11 +7,30 @@ public interface IShip
     void Move(Vector2 dir, float maxSpeed);
 }
 
+public interface IProjectile
+{
+    
+}
+
+public interface IProjectiles
+{
+    IProjectile Spawn(Vector2 position);
+}
+
 public class Ship : KinematicBody2D, IShip
 {
+    [Export]
+    private NodePath _projectilesPath;
+    private IProjectiles _projectiles;
+
+    public override void _Ready()
+    {
+        _projectiles = GetNode<IProjectiles>(_projectilesPath);
+    }
+
     public void Shoot()
     {
-        throw new System.NotImplementedException();
+        _projectiles.Spawn(Position);
     }
 
     public void Move(Vector2 dir, float maxSpeed)

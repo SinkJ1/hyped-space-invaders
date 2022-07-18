@@ -17,5 +17,10 @@ public class Player : Node2D
         {
             _ship.Move(Vector2.Left, 100);
         }
+
+        if (Input.IsActionPressed("ui_space"))
+        {
+            _ship.Shoot();
+        }
     }
 }
